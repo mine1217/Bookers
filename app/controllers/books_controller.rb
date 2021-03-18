@@ -8,6 +8,9 @@ class BooksController < ApplicationController
     book = Book.new(book_params)
     if book.save
       redirect_to book_path(book), flash: {success: "successfully to create"}
+    else
+      flash[:alert] = "error to create"
+      redirect_to books_path
     end
   end
 
@@ -23,6 +26,9 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     if book.update(book_params)
       redirect_to book_path(book), flash: {success: "successfully to update"}
+    else
+      flash[:alert] = "error to edit"
+      redirect_to edit_book_path(book)
     end
   end
 
@@ -30,6 +36,9 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     if book.destroy
      redirect_to books_path, flash: {success: "successfully to destroy"}
+    else
+      flash[:alert] = "error to destroy"
+      redirect_to books_path
     end
   end
 
