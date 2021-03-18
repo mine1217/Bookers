@@ -1,5 +1,12 @@
-<p class="success"><%= flash[:success] %></p>
-<p class="alert"><%= flash[:alert] %></p>
+<p class="alert"><%= flash[:alert] %>
+    <% if @book.errors.any? %>
+        <ul>
+            <% @book.errors.full_messages.each do |msg| %>
+            <li class="alert"><%= msg %></li>
+            <% end %>
+        </ul>
+    <% end %>
+</p>
 
 <h1>Editing Book</h1>
 
@@ -14,4 +21,4 @@
 
   <% end %>
 
-  <%= link_to "Edit", edit_book_path(@book) %> | <%= link_to "Back", books_path %>
+  <%= link_to "Show", book_path(@book) %> | <%= link_to "Back", books_path %>

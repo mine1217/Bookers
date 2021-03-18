@@ -17,7 +17,7 @@
         <td><%= book.body %></td>
         <td><%= link_to "Show", book_path(book) %></td>
         <td><%= link_to "Edit", edit_book_path(book) %></td>
-        <td><%= link_to "Destroty", book_path(book), method: :delete %></td>
+        <td><%= link_to "Destroy", book_path(book), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,7 +25,15 @@
 </table>
 
 <p class="success"><%= flash[:success] %></p>
-<p class="alert"><%= flash[:alert] %></p>
+<p class="alert"><%= flash[:alert] %>
+    <% if @book.errors.any? %>
+        <ul>
+            <% @book.errors.full_messages.each do |msg| %>
+            <li class="alert"><%= msg %></li>
+            <% end %>
+        </ul>
+    <% end %>
+</p>
 
 <h2>New book</h2>
 
